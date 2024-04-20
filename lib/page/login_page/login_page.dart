@@ -13,9 +13,6 @@ import 'package:blog/widget/_toolbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// @class : LoginPage
-/// @date : 2021/08/17
-/// @name : jhf
 /// @description :登录 View层
 class LoginPage extends GetCommonView<LoginController> {
   const LoginPage({Key? key}) : super(key: key);
@@ -68,6 +65,12 @@ class LoginPage extends GetCommonView<LoginController> {
                 width: double.infinity,
                 height: 50,
                 margin: const EdgeInsets.only(top: 36, left: 25, right: 25),
+                decoration: BoxDecoration(
+                  color: controller.changeShowButton()
+                      ? ColorStyle.color_24CF5F
+                      : ColorStyle.color_24CF5F_20,
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                ),
                 child: TextButton(
                     style: controller.changeShowButton()
                         ? ButtonStyles.getButtonStyle()
@@ -82,12 +85,6 @@ class LoginPage extends GetCommonView<LoginController> {
                           ? Styles.style_white_18
                           : Styles.style_white24_18,
                     )),
-                decoration: BoxDecoration(
-                  color: controller.changeShowButton()
-                      ? ColorStyle.color_24CF5F
-                      : ColorStyle.color_24CF5F_20,
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                ),
               ),
 
               ///注册按钮
@@ -95,6 +92,11 @@ class LoginPage extends GetCommonView<LoginController> {
                 width: double.infinity,
                 height: 50,
                 margin: const EdgeInsets.only(top: 16, left: 25, right: 25),
+                decoration: BoxDecoration(
+                  color: Colors.black12,
+                  borderRadius: const BorderRadius.all(Radius.circular(30)),
+                  border: Border.all(color: Colors.white, width: 1),
+                ),
                 child: TextButton(
                     style: ButtonStyles.getButtonStyle(),
                     onPressed: () {
@@ -105,11 +107,6 @@ class LoginPage extends GetCommonView<LoginController> {
                       StringStyles.registerButton.tr,
                       style: Styles.style_white_18,
                     )),
-                decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: const BorderRadius.all(Radius.circular(30)),
-                  border: Border.all(color: Colors.white, width: 1),
-                ),
               )
             ],
           ),
