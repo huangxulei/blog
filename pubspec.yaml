@@ -1,0 +1,47 @@
+name: blog
+description: "A new Flutter project."
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+    sdk: ">=3.3.3 <4.0.0"
+
+dependencies:
+    flutter:
+        sdk: flutter
+
+    cupertino_icons: ^1.0.6
+    connectivity: ^3.0.6
+    dio: ^5.4.3+1
+    flutter_svg: ^2.0.10+1
+    fluttertoast: ^8.2.4
+    get: ^4.6.6
+    shared_preferences: ^2.2.2
+    pull_to_refresh: ^2.0.0
+    lottie: ^3.1.0
+    url_launcher: ^6.2.5
+    permission_handler: ^11.3.1
+    window_manager: ^0.3.8
+
+dev_dependencies:
+    flutter_test:
+        sdk: flutter
+
+    flutter_lints: ^3.0.0
+
+flutter:
+    uses-material-design: true
+
+    assets:
+        - assets/images/3.0x/
+        - assets/svg/
+        - assets/lottie/lottie_common_load.json
+        - assets/lottie/page_loading_anim.json
+        - assets/lottie/refresh_footer.json
+        - assets/lottie/refresh_head_loading.json
+        - assets/lottie/refresh_empty_page.json
+        - assets/lottie/refresh_error.json
+        - assets/lottie/collect_success.json
