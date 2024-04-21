@@ -35,11 +35,11 @@ class MyPage extends GetSaveView<MyController> {
                 onTap: () => Get.toNamed(Routes.userInfoPage),
                 child: Container(
                   margin: const EdgeInsets.only(left: 24),
+                  decoration: ShadowStyle.black12Circle40(),
                   child: HeadCircleWidget(
                     width: 72,
                     height: 72,
                   ),
-                  decoration: ShadowStyle.black12Circle40(),
                 ),
               ),
 

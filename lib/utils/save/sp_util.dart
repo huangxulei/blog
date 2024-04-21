@@ -86,6 +86,26 @@ class SpUtil {
     }
   }
 
+  ///存储语言
+  ///[Language] 语言
+  static updateLanguage(Language language) {
+    Get.find<SharedPreferences>().remove(SPKey.language);
+    Get.find<SharedPreferences>()
+        .setString(SPKey.language, jsonEncode(language.toJson()));
+  }
+
+  ///浏览记录JSON转换为Model之后的数据
+  static List<ProjectDetail> getBrowseHistoryModel() {
+    var data = <ProjectDetail>[];
+    var history = getBrowseHistory();
+    for (var element in history) {
+      var map = jsonDecode(element);
+      var convert = ProjectDetail.fromJson(map);
+      data.add(convert);
+    }
+    return data;
+  }
+
   ///浏览记录长度
   static int getBrowseHistoryLength() {
     return getBrowseHistory().length;

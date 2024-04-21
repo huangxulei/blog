@@ -31,7 +31,7 @@ void main() async {
           child: child,
         ),
       ); //do something
-      child = botToastBuilder(context, child);
+      child = botToastBuilder(context, child); //添加toast方法
       return child;
     },
     navigatorObservers: [BotToastNavigatorObserver()],

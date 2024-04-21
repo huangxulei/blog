@@ -2,6 +2,7 @@ import 'package:blog/http/http_request.dart';
 import 'package:blog/http/request.dart';
 import 'package:blog/http/request_api.dart';
 import 'package:blog/model/banner_mode.dart';
+import 'package:blog/model/hotword_mode.dart';
 import 'package:blog/model/project_model.dart';
 import 'package:blog/model/wechat_public_mode.dart';
 import 'package:blog/utils/function.dart';
@@ -66,6 +67,57 @@ class RequestRepository {
       SpUtil.putUserInfo(loginInfo);
       if (success != null) {
         success(loginInfo);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///根据关键词搜索文章
+  /// [page]当前页码
+  /// [hotWord] 当前热词
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  searchKeyWord(
+    int page,
+    String hotWord, {
+    SuccessOver<List<ProjectDetail>>? success,
+    Fail? fail,
+  }) {
+    Request.post<Map<String, dynamic>>(
+        RequestApi.apiSearchWord.replaceFirst(RegExp('page'), '$page'),
+        {
+          "k": hotWord,
+        },
+        dialog: false, success: (data) {
+      ProjectPage pageData = ProjectPage.fromJson(data);
+      var list = pageData.datas.map((value) {
+        return ProjectDetail.fromJson(value);
+      }).toList();
+      if (success != null) {
+        success(list, pageData.over);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///获取搜索热词
+  getSearchHotWord({
+    Success<List<HotWord>>? success,
+    Fail? fail,
+  }) {
+    Request.get<List<dynamic>>(RequestApi.apiHotWord, {}, dialog: false,
+        success: (data) {
+      if (success != null) {
+        var list = data.map((value) {
+          return HotWord.fromJson(value);
+        }).toList();
+        success(list);
       }
     }, fail: (code, msg) {
       if (fail != null) {
@@ -309,6 +361,23 @@ class RequestRepository {
       }).toList();
       if (success != null) {
         success(list, pageData.over);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///退出登录
+  exitLogin({
+    Success<bool>? success,
+    Fail? fail,
+  }) {
+    Request.post<dynamic>(RequestApi.apiLogout, {}, dialog: false,
+        success: (data) {
+      if (success != null) {
+        success(true);
       }
     }, fail: (code, msg) {
       if (fail != null) {

@@ -4,8 +4,20 @@ import 'package:blog/page/login_page/login_binding.dart';
 import 'package:blog/page/login_page/login_page.dart';
 import 'package:blog/page/register_page/register_binding.dart';
 import 'package:blog/page/register_page/register_page.dart';
+import 'package:blog/page/search_page/search_binding.dart';
+import 'package:blog/page/search_page/search_page.dart';
 import 'package:blog/page/splash_page/splash_binding.dart';
 import 'package:blog/page/splash_page/splash_page.dart';
+import 'package:blog/page/user_module/about_page/about_binding.dart';
+import 'package:blog/page/user_module/about_page/about_page.dart';
+import 'package:blog/page/user_module/history_page/history_binding.dart';
+import 'package:blog/page/user_module/history_page/history_page.dart';
+import 'package:blog/page/user_module/setting_page/setting_binding.dart';
+import 'package:blog/page/user_module/setting_page/setting_page.dart';
+import 'package:blog/page/user_module/user_info_page/userinfo_binding.dart';
+import 'package:blog/page/user_module/user_info_page/userinfo_page.dart';
+import 'package:blog/page/webview_page/webview_binding.dart';
+import 'package:blog/page/webview_page/webview_page.dart';
 import 'package:get/get.dart';
 
 abstract class Routes {
@@ -72,6 +84,30 @@ abstract class Routes {
         page: () => const LoginPage(),
         binding: LoginBinding()),
     GetPage(
+        name: userInfoPage,
+        page: () => const UserInfoPage(),
+        binding: UserInfoBinding()),
+    GetPage(
         name: homePage, page: () => const HomePage(), binding: HomeBinding()),
+    GetPage(
+        name: aboutPage,
+        page: () => const AboutPage(),
+        binding: AboutBinding()),
+    GetPage(
+        name: settingPage,
+        page: () => const SettingPage(),
+        binding: SettingBinding()),
+    GetPage(
+        name: historyPage,
+        page: () => const HistoryPage(),
+        binding: HistoryBinding()),
+    GetPage(
+        name: webViewPage,
+        page: () => const WebViewPage(),
+        binding: WebViewBinding()),
+    GetPage(
+        name: searchPage,
+        page: () => const SearchPage(),
+        binding: SearchBinding()),
   ];
 }
