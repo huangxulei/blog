@@ -1,6 +1,5 @@
 import 'package:blog/http/request_repository.dart';
 import 'package:get/get.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 /// @class : BaseGetController
 /// @date : 2021/08/26

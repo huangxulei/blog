@@ -7,9 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
-/// @class : RegisterPrivacyWidget
-/// @date : 2021/08/18
-/// @name : jhf
 /// @description :注册 用户服务条款
 class RegisterPrivacyWidget extends GetCommonView<RegisterController> {
   const RegisterPrivacyWidget({Key? key}) : super(key: key);

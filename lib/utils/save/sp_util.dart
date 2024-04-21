@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:blog/model/language.dart';
+import 'package:blog/model/project_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -121,5 +122,21 @@ class SpUtil {
       debugPrint(e.toString());
       return null;
     }
+  }
+
+  /// 浏览历史记录
+  /// [detail] 浏览记录
+  static saveBrowseHistory(ProjectDetail detail) {
+    var history = getBrowseHistory();
+    for (var element in history) {
+      Map<String, dynamic> map = jsonDecode(element);
+      var convert = ProjectDetail.fromJson(map);
+      if (convert.id == detail.id) {
+        return;
+      }
+    }
+    var toJson = jsonEncode(detail.toJson());
+    history.insert(0, toJson);
+    Get.find<SharedPreferences>().setStringList(SPKey.browseHistory, history);
   }
 }

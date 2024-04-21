@@ -11,7 +11,7 @@ class Config {
         size: Size(500, 750),
         center: true,
         // backgroundColor: Colors.white,
-        skipTaskbar: true,
+        skipTaskbar: false,
         // titleBarStyle: TitleBarStyle.hidden,
       );
       windowManager.waitUntilReadyToShow(windowOptions, () async {

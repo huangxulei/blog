@@ -6,6 +6,7 @@ import 'package:blog/routes/routes.dart';
 import 'package:blog/utils/config.dart';
 import 'package:blog/utils/keyboard_util.dart';
 import 'package:blog/utils/locale_util.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,19 +16,25 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Config.init();
   await Injection.init();
+  final botToastBuilder = BotToastInit();
   runApp(GetMaterialApp(
     getPages: Routes.routePage,
     debugShowCheckedModeBanner: false,
     initialRoute: '/',
-    builder: (context, child) => Scaffold(
-      // Global GestureDetector that will dismiss the keyboard
-      body: GestureDetector(
-        onTap: () {
-          KeyboardUtils.hideKeyboard(context);
-        },
-        child: child,
-      ),
-    ),
+    builder: (context, child) {
+      child = Scaffold(
+        // Global GestureDetector that will dismiss the keyboard
+        body: GestureDetector(
+          onTap: () {
+            KeyboardUtils.hideKeyboard(context);
+          },
+          child: child,
+        ),
+      ); //do something
+      child = botToastBuilder(context, child);
+      return child;
+    },
+    navigatorObservers: [BotToastNavigatorObserver()],
 
     ///主题颜色
     theme: appThemeData,

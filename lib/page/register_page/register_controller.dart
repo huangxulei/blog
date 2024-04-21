@@ -1,7 +1,4 @@
 import 'package:blog/base/get/getx_controller_inject.dart';
-import 'package:blog/http/request.dart';
-import 'package:blog/http/request_api.dart';
-import 'package:blog/model/request_register.dart';
 import 'package:blog/res/strings.dart';
 import 'package:blog/routes/routes.dart';
 import 'package:blog/utils/toast_util.dart';

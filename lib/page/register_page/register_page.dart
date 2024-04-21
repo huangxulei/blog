@@ -13,9 +13,6 @@ import 'package:blog/widget/_toolbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/// @class : RegisterPage
-/// @date : 2021/08/17
-/// @name : jhf
 /// @description :注册 View层
 class RegisterPage extends GetCommonView<RegisterController> {
   const RegisterPage({Key? key}) : super(key: key);
@@ -85,6 +82,12 @@ class RegisterPage extends GetCommonView<RegisterController> {
                     width: double.infinity,
                     height: 50,
                     margin: const EdgeInsets.only(top: 16, left: 25, right: 25),
+                    decoration: BoxDecoration(
+                      color: controller.changeShowButton()
+                          ? ColorStyle.color_24CF5F
+                          : ColorStyle.color_24CF5F_20,
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    ),
                     child: TextButton(
                         style: controller.changeShowButton()
                             ? ButtonStyles.getButtonStyle()
@@ -99,12 +102,6 @@ class RegisterPage extends GetCommonView<RegisterController> {
                               ? Styles.style_white_18
                               : Styles.style_white24_18,
                         )),
-                    decoration: BoxDecoration(
-                      color: controller.changeShowButton()
-                          ? ColorStyle.color_24CF5F
-                          : ColorStyle.color_24CF5F_20,
-                      borderRadius: const BorderRadius.all(Radius.circular(30)),
-                    ),
                   ),
                 ],
               ),

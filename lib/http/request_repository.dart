@@ -1,6 +1,10 @@
 import 'package:blog/http/http_request.dart';
 import 'package:blog/http/request.dart';
 import 'package:blog/http/request_api.dart';
+import 'package:blog/model/banner_mode.dart';
+import 'package:blog/model/project_model.dart';
+import 'package:blog/model/wechat_public_mode.dart';
+import 'package:blog/utils/function.dart';
 
 import '../model/request_register.dart';
 import '../utils/save/sp_util.dart';
@@ -107,6 +111,204 @@ class RequestRepository {
         dialog: false, success: (data) {
       if (success != null) {
         success(true);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///请求首页文章列表接口
+  ///[id]文章ID
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  requestHomeArticle(
+    int page, {
+    SuccessOver<List<ProjectDetail>>? success,
+    Fail? fail,
+  }) {
+    Request.get<dynamic>(
+        RequestApi.apiHome.replaceFirst(RegExp('page'), '${page - 1}'), {},
+        dialog: false, success: (data) {
+      ProjectPage pageData = ProjectPage.fromJson(data);
+      var list = pageData.datas.map((value) {
+        return ProjectDetail.fromJson(value);
+      }).toList();
+      if (success != null) {
+        success(list, pageData.over);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///获取首页的Banner图片
+  getBanner({
+    Success<List<Banners>>? success,
+    Fail? fail,
+  }) {
+    Request.get<List<dynamic>>(RequestApi.apiBanner, {}, dialog: false,
+        success: (data) {
+      if (success != null) {
+        var list = data.map((value) {
+          return Banners.fromJson(value);
+        }).toList();
+        success(list);
+        print(list);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///获取微信公众号列表
+  getWechatPublic({
+    Success<List<WechatPublic>>? success,
+    Fail? fail,
+  }) {
+    Request.get<List<dynamic>>(RequestApi.apiWechatPublic, {}, dialog: false,
+        success: (data) {
+      if (success != null) {
+        var list = data.map((value) {
+          return WechatPublic.fromJson(value);
+        }).toList();
+        success(list);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///请求首页文章列表接口
+  ///[id]文章ID
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  requestShareArticleList(
+    int page, {
+    ParamSingleCallback<int>? length,
+    SuccessOver<List<ProjectDetail>>? success,
+    Fail? fail,
+  }) {
+    Request.get<dynamic>(
+        RequestApi.apiShareArticleList.replaceFirst(RegExp('page'), '$page'),
+        {},
+        dialog: false, success: (data) {
+      ProjectPage pageData = ProjectPage.fromJson(data['shareArticles']);
+      var list = pageData.datas.map((value) {
+        return ProjectDetail.fromJson(value);
+      }).toList();
+      if (success != null) {
+        success(list, pageData.over);
+      }
+      if (length != null) {
+        length(pageData.total);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  /// 分享文章到站点
+  /// [title] 文章标题
+  /// [link] 文章链接
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  shareArticle(
+    String title,
+    String link, {
+    Success<String>? success,
+    Fail? fail,
+  }) {
+    Request.post(RequestApi.apiAddArticle, {'title': title, 'link': link},
+        dialog: false, success: (data) {
+      if (success != null) {
+        success("success");
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///请求广场列表接口
+  /// [page] 当前页面
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  requestSquareModule(
+    int page, {
+    SuccessOver<List<ProjectDetail>>? success,
+    Fail? fail,
+  }) {
+    Request.get<dynamic>(
+        RequestApi.apiSquare.replaceFirst(RegExp('page'), '${page - 1}'), {},
+        dialog: false, success: (data) {
+      ProjectPage pageData = ProjectPage.fromJson(data);
+      var list = pageData.datas.map((value) {
+        return ProjectDetail.fromJson(value);
+      }).toList();
+      if (success != null) {
+        success(list, pageData.over);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///请求问答接口
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  requestAskModule(
+    int page, {
+    SuccessOver<List<ProjectDetail>>? success,
+    Fail? fail,
+  }) {
+    Request.get<dynamic>(
+        RequestApi.apiAsk.replaceFirst(RegExp('page'), '$page'), {},
+        dialog: false, success: (data) {
+      ProjectPage pageData = ProjectPage.fromJson(data);
+      var list = pageData.datas.map((value) {
+        return ProjectDetail.fromJson(value);
+      }).toList();
+      if (success != null) {
+        success(list, pageData.over);
+      }
+    }, fail: (code, msg) {
+      if (fail != null) {
+        fail(code, msg);
+      }
+    });
+  }
+
+  ///请求项目列表接口
+  ///[id]文章ID
+  /// [success] 请求成功回调
+  /// [fail] 请求失败回调
+  requestTabModule(
+    int page, {
+    SuccessOver<List<ProjectDetail>>? success,
+    Fail? fail,
+  }) {
+    Request.get<dynamic>(
+        RequestApi.apiProject.replaceFirst(RegExp('page'), '$page'), {},
+        dialog: false, success: (data) {
+      ProjectPage pageData = ProjectPage.fromJson(data);
+      var list = pageData.datas.map((value) {
+        return ProjectDetail.fromJson(value);
+      }).toList();
+      if (success != null) {
+        success(list, pageData.over);
       }
     }, fail: (code, msg) {
       if (fail != null) {

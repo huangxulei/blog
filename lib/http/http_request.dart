@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:blog/http/http_exception.dart';
 import 'package:blog/http/request_api.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 
 /// 连接超时时间

@@ -1,3 +1,5 @@
+import 'package:blog/page/home_page/home_binding.dart';
+import 'package:blog/page/home_page/home_page.dart';
 import 'package:blog/page/login_page/login_binding.dart';
 import 'package:blog/page/login_page/login_page.dart';
 import 'package:blog/page/register_page/register_binding.dart';
@@ -69,5 +71,7 @@ abstract class Routes {
         name: loginPage,
         page: () => const LoginPage(),
         binding: LoginBinding()),
+    GetPage(
+        name: homePage, page: () => const HomePage(), binding: HomeBinding()),
   ];
 }
